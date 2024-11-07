@@ -1,0 +1,22 @@
+body {
+    font-family: Arial, sans-serif;
+    background-image: url('image/y1.jpg'); /* Path to your background image */
+    background-size: cover; /* Cover the entire viewport */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    background-position: center; /* Center the image */
+    color: #333;
+    text-align: center;
+    padding: 50px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 2px solid #4CAF50;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Remaining CSS styles unchanged */

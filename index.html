@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY TEACHERS DAY</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images/k4.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+            animation: backgroundAnimation 30s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.1); }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #0e0b07;
+            border-radius: 10px;
+            background-color: rgba(219, 216, 205, 0.9);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            animation: titleAnimation 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes titleAnimation {
+            0% { transform: translateY(-20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .teacher-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            background: linear-gradient(135deg, #6a9cff, #e6b0ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            animation: buttonFadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes buttonFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .teacher-button:hover {
+            background: linear-gradient(135deg, #e6b0ff, #6a9cff);
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ad3232e5;
+            transition: opacity 0.5s;
+            opacity: 0;
+            animation: messageFadeIn 0.5s forwards;
+        }
+
+        @keyframes messageFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Balloon styles */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50px 50px 0 0;
+            animation: float 6s forwards, rise 4s forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            to {
+                transform: rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Glitter styles */
+        .glitter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .glitter canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.4.0/confetti.browser.min.js"></script>
+    <script>
+        const applause  = new Audio('applause.mp3');
+        const backgroundMusic = new Audio('background-music.mp3'); // Add your music file
+        backgroundMusic.loop = true;
+        backgroundMusic.volume = 0.1; // Set volume lower for background music
+        backgroundMusic.play();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const teachers = ["Mr. Bryan Cabrido", "Ms. Kiarrah Villegas", "Mr. Jeff Mana-ay", "Mrs. Jessa Tugas", "Mr. Marvin Saraza"];
+            
+            const messages = {
+                "Mr. Bryan Cabrido": "Thank you, Mr. Cabrido, for your endless patience!",
+                "Ms. Kiarrah Villegas": "Thank you, Ms. Villegas, for inspiring us to be our best!",
+                "Mrs. Jessa Tugas": "Thank you, Mrs. Tugas, for your dedication!",
+                "Mr. Marvin Saraza": "Thank you, Mr. Saraza, for shaping our future!",
+                "Mr. Jeff Mana-ay": "Thank you, Mr. Mana-ay, for teaching us!",
+            };
+
+            const teacherButtonsContainer = document.getElementById('teacherButtons');
+            const messageDisplay = document.getElementById('messageDisplay');
+
+            function createTeacherButtons() {
+                teachers.forEach(teacher => {
+                    const button = document.createElement('button');
+                    button.textContent = teacher;
+                    button.className = 'teacher-button';
+                    button.addEventListener('click', () => {
+                        displayMessage(teacher);
+                        triggerConfetti();
+                        applauseSound.play();
+                    });
+                    teacherButtonsContainer.appendChild(button);
+                });
+            }
+
+            function displayMessage(teacher) {
+                messageDisplay.textContent = messages[teacher];
+                messageDisplay.style.opacity = 1;
+                setTimeout(() => {
+                    messageDisplay.style.opacity = 0;
+                }, 3000);
+            }
+
+            function triggerConfetti() {
+                const count = 200;
+                for (let i = 0; i < count; i++) {
+                    confetti({
+                        origin: {
+                            x: Math.random(),
+                            y: Math.random() - 0.2
+                        },
+                        angle: Math.random() * 360,
+                        spread: 70 + Math.random() * 100,
+                        startVelocity: Math.random() * 25 + 10,
+                        dragFriction: 0.1,
+                        duration: 3000 + Math.random() * 2000,
+                        ticks: 60,
+                        colors: ['#bb0000', '#ffffff', '#00bb00', '#0000bb', '#ffbb00', '#ff00bb', '#ff5733', '#c70039', '#FFC300'],
+                        scalar: Math.random() * 1.5 + 1
+                    });
+                }
+            }
+
+            function createBalloon() {
+                const balloonColors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33A8'];
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.backgroundColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                balloon.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                balloon.style.width = (Math.random() * 30 + 20) + 'px'; // Random width
+                balloon.style.height = (Math.random() * 30 + 50) + 'px'; // Random height
+                document.body.appendChild(balloon);
+
+                // Remove balloon after animation
+                balloon.addEventListener('animationend', () => {
+                    balloon.remove();
+                });
+            }
+
+            // Create balloons every 2 seconds
+            setInterval(createBalloon, 2000);
+
+            // Automatically trigger confetti every 5 seconds
+            setInterval(triggerConfetti, 5000);
+
+            createTeacherButtons();
+            // Trigger initial confetti on page load
+            triggerConfetti();
+
+            // Create glitter canvas
+            const glitterCanvas = document.createElement('canvas');
+            const glitterCtx = glitterCanvas.getContext('2d');
+            const glitterContainer = document.createElement('div');
+            glitterContainer.className = 'glitter';
+            glitterContainer.appendChild(glitterCanvas);
+            document.body.appendChild(glitterContainer);
+
+            // Set canvas dimensions
+            glitterCanvas.width = window.innerWidth;
+            glitterCanvas.height = window.innerHeight;
+
+            // Draw glitter particles
+            function drawGlitter() {
+                glitterCtx.clearRect(0, 0, glitterCanvas.width, glitterCanvas.height);
+                for (let i = 0; i < 100; i++) {
+                    const x = Math.random() * glitterCanvas.width;
+                    const y = Math.random() * glitterCanvas.height;
+                    const size = Math.random() * 5 + 1;
+                    const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    glitterCtx.beginPath();
+                    glitterCtx.arc(x, y, size, 0, 2 * Math.PI);
+                    glitterCtx.fillStyle = color;
+                    glitterCtx.fill();
+                }
+            }
+
+            // Animate glitter particles
+            function animateGlitter() {
+                drawGlitter();
+                requestAnimationFrame(animateGlitter);
+            }
+
+            animateGlitter();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>HAPPY TEACHERS DAY</h1>
+        <div id="teacherButtons" class="button-container"></div>
+        <div id="messageDisplay" class="message"></div>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAPPY TEACHERS DAY</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('images/k4.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            color: #333;
+            text-align: center;
+            padding: 50px;
+            overflow: hidden;
+            animation: backgroundAnimation 30s infinite alternate;
+        }
+
+        @keyframes backgroundAnimation {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(1.1); }
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 2px solid #0e0b07;
+            border-radius: 10px;
+            background-color: rgba(219, 216, 205, 0.9);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        h1 {
+            animation: titleAnimation 1s forwards;
+            opacity: 0;
+        }
+
+        @keyframes titleAnimation {
+            0% { transform: translateY(-20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        .teacher-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 5px;
+            background: linear-gradient(135deg, #6a9cff, #e6b0ff);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            animation: buttonFadeIn 0.5s ease-in forwards;
+        }
+
+        @keyframes buttonFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .teacher-button:hover {
+            background: linear-gradient(135deg, #e6b0ff, #6a9cff);
+            transform: scale(1.1) rotate(2deg);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ad3232e5;
+            transition: opacity 0.5s;
+            opacity: 0;
+            animation: messageFadeIn 0.5s forwards;
+        }
+
+        @keyframes messageFadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Balloon styles */
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            width: 50px;
+            height: 70px;
+            border-radius: 50px 50px 0 0;
+            animation: float 6s forwards, rise 4s forwards;
+            opacity: 0.8;
+        }
+
+        @keyframes float {
+            to {
+                transform: rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes rise {
+            to {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        /* Glitter styles */
+        .glitter {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .glitter canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.4.0/confetti.browser.min.js"></script>
+    <script>
+        const applauseSound = new Audio('applause.mp3');
+        const backgroundMusic = new Audio('background-music.mp3'); // Add your music file
+        backgroundMusic.loop = true;
+        backgroundMusic.volume = 0.1; // Set volume lower for background music
+        backgroundMusic.play();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const teachers = ["Mr. Bryan Cabrido", "Ms. Kiarrah Villegas", "Mr. Jeff Mana-ay", "Mrs. Jessa Tugas", "Mr. Marvin Saraza"];
+            
+            const messages = {
+                "Mr. Bryan Cabrido": "Thank you, Mr. Cabrido, for your endless patience!",
+                "Ms. Kiarrah Villegas": "Thank you, Ms. Villegas, for inspiring us to be our best!",
+                "Mrs. Jessa Tugas": "Thank you, Mrs. Tugas, for your dedication!",
+                "Mr. Marvin Saraza": "Thank you, Mr. Saraza, for shaping our future!",
+                "Mr. Jeff Mana-ay": "Thank you, Mr. Mana-ay, for teaching us!",
+            };
+
+            const teacherButtonsContainer = document.getElementById('teacherButtons');
+            const messageDisplay = document.getElementById('messageDisplay');
+
+            function createTeacherButtons() {
+                teachers.forEach(teacher => {
+                    const button = document.createElement('button');
+                    button.textContent = teacher;
+                    button.className = 'teacher-button';
+                    button.addEventListener('click', () => {
+                        displayMessage(teacher);
+                        triggerConfetti();
+                        applauseSound.play();
+                    });
+                    teacherButtonsContainer.appendChild(button);
+                });
+            }
+
+            function displayMessage(teacher) {
+                messageDisplay.textContent = messages[teacher];
+                messageDisplay.style.opacity = 1;
+                setTimeout(() => {
+                    messageDisplay.style.opacity = 0;
+                }, 3000);
+            }
+
+            function triggerConfetti() {
+                const count = 200;
+                for (let i = 0; i < count; i++) {
+                    confetti({
+                        origin: {
+                            x: Math.random(),
+                            y: Math.random() - 0.2
+                        },
+                        angle: Math.random() * 360,
+                        spread: 70 + Math.random() * 100,
+                        startVelocity: Math.random() * 25 + 10,
+                        dragFriction: 0.1,
+                        duration: 3000 + Math.random() * 2000,
+                        ticks: 60,
+                        colors: ['#bb0000', '#ffffff', '#00bb00', '#0000bb', '#ffbb00', '#ff00bb', '#ff5733', '#c70039', '#FFC300'],
+                        scalar: Math.random() * 1.5 + 1
+                    });
+                }
+            }
+
+            function createBalloon() {
+                const balloonColors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33A8'];
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.backgroundColor = balloonColors[Math.floor(Math.random() * balloonColors.length)];
+                balloon.style.left = Math.random() * 100 + 'vw'; // Random horizontal position
+                balloon.style.width = (Math.random() * 30 + 20) + 'px'; // Random width
+                balloon.style.height = (Math.random() * 30 + 50) + 'px'; // Random height
+                document.body.appendChild(balloon);
+
+                // Remove balloon after animation
+                balloon.addEventListener('animationend', () => {
+                    balloon.remove();
+                });
+            }
+
+            // Create balloons every 2 seconds
+            setInterval(createBalloon, 2000);
+
+            // Automatically trigger confetti every 5 seconds
+            setInterval(triggerConfetti, 5000);
+
+            createTeacherButtons();
+            // Trigger initial confetti on page load
+            triggerConfetti();
+
+            // Create glitter canvas
+            const glitterCanvas = document.createElement('canvas');
+            const glitterCtx = glitterCanvas.getContext('2d');
+            const glitterContainer = document.createElement('div');
+            glitterContainer.className = 'glitter';
+            glitterContainer.appendChild(glitterCanvas);
+            document.body.appendChild(glitterContainer);
+
+            // Set canvas dimensions
+            glitterCanvas.width = window.innerWidth;
+            glitterCanvas.height = window.innerHeight;
+
+            // Draw glitter particles
+            function drawGlitter() {
+                glitterCtx.clearRect(0, 0, glitterCanvas.width, glitterCanvas.height);
+                for (let i = 0; i < 100; i++) {
+                    const x = Math.random() * glitterCanvas.width;
+                    const y = Math.random() * glitterCanvas.height;
+                    const size = Math.random() * 5 + 1;
+                    const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    glitterCtx.beginPath();
+                    glitterCtx.arc(x, y, size, 0, 2 * Math.PI);
+                    glitterCtx.fillStyle = color;
+                    glitterCtx.fill();
+                }
+            }
+
+            // Animate glitter particles
+            function animateGlitter() {
+                drawGlitter();
+                requestAnimationFrame(animateGlitter);
+            }
+
+            animateGlitter();
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>HAPPY TEACHERS DAY</h1>
+        <div id="teacherButtons" class="button-container"></div>
+        <div id="messageDisplay" class="message"></div>
+    </div>
+</body>
+</html>

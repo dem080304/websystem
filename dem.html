@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM & Luffy Example</title> 
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .modal {
+            display: none;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 30px;
+            width: 600px;
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .background1, .background2 {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.6s ease;
+        }
+
+        /* Update these URLs with your desired background images */
+        .background1 {
+            background-image: url('images/q4.gif'); /* Replace with your new image URL */
+        }
+
+        .background2 {
+            background-image: url('images/u3.gif'); /* Replace with your new image URL */
+        }
+
+        .background1.active, .background2.active {
+            display: block;
+            z-index: 1;
+            opacity: 1;
+        }
+
+        button {
+            background: linear-gradient(45deg, #007BFF, #00BFFF);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: background 0.4s, transform 0.3s ease;
+        }
+
+        button:hover {
+            background: linear-gradient(45deg, #0056b3, #0099cc);
+            transform: translateY(-2px);
+        }
+
+        button:focus {
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button id="showDOMModal">Show DOM Modal</button>
+
+        <!-- Modal 1 (DOM Modal) -->
+        <div class="modal" id="modal1">
+            <h1>Welcome to the DOM World!</h1>
+            <img src="images/o3.gif" alt="Scenic Image" width="250" style="border-radius: 12px;">
+            <p>Click the button to explore more!</p>
+            <button id="domButton">Click Here!</button>
+            <p>Current ID: <span id="modalId">1</span></p>
+        </div>
+
+        <!-- Modal 2 (Piggy Modal) -->
+        <div class="modal" id="modal2">
+            <h1>Hello World! I am Luffy!</h1>
+            <img src="images/o2.gif" alt="Luffy Image" width="250" style="border-radius: 12px;">
+            <p>I Will Be The Pirate King!</p>
+            <button id="LuffyButton">Click Here!</button>
+            <p>Current ID: <span id="modalId2">2</span></p>
+        </div>
+    </div>
+
+    <!-- Backgrounds -->
+    <div class="background1" id="background1"></div>
+    <div class="background2" id="background2"></div>
+
+    <script>
+        let autoIncrementId = 1; // Initialize auto-increment ID
+
+        // Event handler for showing the initial DOM Modal
+        document.getElementById('showDOMModal').addEventListener('click', () => showModal('modal1'));
+
+        // Event handler for button click inside DOM Modal
+        document.getElementById('domButton').addEventListener('click', () => {
+            autoIncrementId++; // Increment the ID when button is clicked
+            showModal('modal2');
+        });
+
+        // Event handler for button click inside Piggy Modal
+        document.getElementById('LuffyButton').addEventListener('click', () => {
+            alert('PLuffy Button clicked! Explore more...');
+        });
+
+        // Function to show modals and change backgrounds with smooth transitions
+        function showModal(modalId) {
+            // Hide all modals and reset backgrounds
+            document.querySelectorAll('.modal').forEach(modal => modal.classList.remove('active'));
+            document.querySelectorAll('.background1, .background2').forEach(bg => bg.classList.remove('active'));
+
+            // Show the selected modal
+            const modal = document.getElementById(modalId);
+            modal.classList.add('active');
+
+            // Update the ID display
+            if (modalId === 'modal1') {
+                document.getElementById('modalId').textContent = autoIncrementId;
+                document.getElementById('background1').classList.add('active');
+            } else if (modalId === 'modal2') {
+                document.getElementById('modalId2').textContent = autoIncrementId;
+                document.getElementById('background2').classList.add('active');
+            }
+        }
+
+        // Initialize by showing the first modal and background
+        showModal('modal1');
+    </script>
+</body>
+</html>

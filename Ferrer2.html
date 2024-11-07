@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Home Page</title>
+    <style>
+        /* Basic styling for body */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4; /* Light grey background */
+            color: #333; /* Dark grey text color */
+            transition: background-color 1s; /* Smooth transition for background color */
+        }
+
+        /* Header styling */
+        header {
+            background-color: black; /* Black background */
+            color: violet; /* Violet text color */
+            padding: 20px;
+            text-align: center;
+            animation: fadeIn 1s ease-in; /* Fade-in animation for header */
+        }
+
+        /* Section styling */
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white; /* White background for sections */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        /* Styling for section headers */
+        h2 {
+            color: violet; /* Violet color for section headers */
+            animation: slideIn 0.5s ease-in-out; /* Slide-in animation for section headers */
+        }
+
+        /* Styling for each product card */
+        .product {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid violet; /* Violet border */
+            border-radius: 5px;
+            display: flex; /* Flexbox for layout */
+            flex-direction: row; /* Horizontal layout */
+            align-items: center; /* Center items vertically */
+            transition: transform 0.3s; /* Smooth transform transition */
+        }
+
+        /* Hover effect for product cards */
+        .product:hover {
+            transform: scale(1.02); /* Slightly scale up on hover */
+        }
+
+        /* Image styling */
+        .product img {
+            width: 100px; /* Fixed width for images */
+            height: auto; /* Maintain aspect ratio */
+            margin-right: 15px; /* Space between image and text */
+            transition: transform 0.3s; /* Smooth transform transition */
+        }
+
+        /* Hover effect for product images */
+        .product:hover img {
+            transform: scale(1.1); /* Slightly scale up on hover */
+        }
+
+        /* Product details container */
+        .product-details {
+            flex-grow: 1; /* Allow this section to grow */
+        }
+
+        /* Form styling */
+        form {
+            margin-top: 10px;
+        }
+
+        /* Input field styling */
+        input[type="number"], input[type="text"], input[type="email"] {
+            width: 150px; /* Fixed width for input fields */
+            margin-right: 10px; /* Space between input and button */
+            padding: 5px; /* Padding for input fields */
+        }
+
+        /* Button styling */
+        button {
+            background-color: violet; /* Violet background */
+            color: black; /* Black text */
+            border: none; /* No border */
+            padding: 10px; /* Padding for button */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+            transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+        }
+
+        /* Hover effect for buttons */
+        button:hover {
+            background-color: #7b1fa2; /* Darker violet on hover */
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        /* Cart summary styling */
+        .cart-summary {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid violet; /* Violet border */
+            border-radius: 5px;
+            background-color: #f9f9f9; /* Light grey background for cart */
+        }
+
+        /* Error message styling */
+        .error {
+            color: red; /* Red color for error messages */
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; } /* Start invisible */
+            to { opacity: 1; } /* End visible */
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; } /* Slide in from above */
+            to { transform: translateY(0); opacity: 1; } /* End at normal position */
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); } /* Start small */
+            to { transform: scale(1); } /* End at normal size */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to Our Store</h1> <!-- Main header -->
+    </header>
+
+    <section>
+        <h2>Products</h2>
+        
+        <!-- Product 1 -->
+aaa        <div class="product">
+            <img src="images/k1.jpg" alt="Product 1"> <!-- Image for Product 1 -->
+            <div class="product-details">
+                <h3>Product 1</h3>
+                <p>Price: $10.00</p>
+                <p>Description: A great product that helps you with X.</p>
+                <p>Rating: ★★★★☆</p>
+                <form onsubmit="return addToCart(event, 'Product 1', 10.00)">
+                    <input type="number" name="quantity" min="1" value="1" required>
+                    <button type="submit">Add to Cart</button>
+                    <div class="error" id="error-product1"></div> <!-- Error message for Product 1 -->
+                </form>
+            </div>
+        </div>
+
+        <!-- Product 2 -->
+        <div class="product">
+            <img src="images/k2.jpg" alt="Product 2"> <!-- Image for Product 2 -->
+            <div class="product-details">
+                <h3>Product 2</h3>
+                <p>Price: $15.00</p>
+                <p>Description: An amazing product that provides Y benefits.</p>
+                <p>Rating: ★★★★☆</p>
+                <form onsubmit="return addToCart(event, 'Product 2', 15.00)">
+                    <input type="number" name="quantity" min="1" value="1" required>
+                    <button type="submit">Add to Cart</button>
+                    <div class="error" id="error-product2"></div> <!-- Error message for Product 2 -->
+                </form>
+            </div>
+        </div>
+        
+        <!-- Product 3 -->
+        <div class="product">
+            <img src="images/k3.jpg" alt="Product 3"> <!-- Image for Product 3 -->
+            <div class="product-details">
+                <h3>Product 3</h3>
+                <p>Price: $20.00</p>
+                <p>Description: A revolutionary product that does Z.</p>
+                <p>Rating: ★★★★★</p>
+                <form onsubmit="return addToCart(event, 'Product 3', 20.00)">
+                    <input type="number" name="quantity" min="1" value="1" required>
+                    <button type="submit">Add to Cart</button>
+                    <div class="error" id="error-product3"></div> <!-- Error message for Product 3 -->
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Your Cart</h2>
+        <div class="cart-summary">
+            <p id="cart-items">Items in Cart: 0</p> <!-- Display cart item count -->
+            <p id="cart-total">Total Price: $0.00</p> <!-- Display total price -->
+        </div>
+        <button onclick="placeOrder()">Place Order</button> <!-- Button to place order -->
+    </section>
+
+    <section>
+        <h2>Contact Information</h2>
+        <form id="contact-form" onsubmit="return validateContactForm(event)">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <button type="submit">Submit</button>
+            <div class="error" id="contact-error"></div> <!-- Error message for contact form -->
+        </form>
+    </section>
+
+    <script>
+        let cartItems = 0; // Counter for total items in cart
+        let totalPrice = 0; // Counter for total price
+
+        // Function to add items to cart
+        function addToCart(event, productName, price) {
+            event.preventDefault(); // Prevent the form from submitting
+            
+            // Get the quantity input and its associated error message element
+            const quantityInput = event.target.querySelector('input[type="number"]');
+            const errorMessage = event.target.querySelector('.error');
+            const quantity = parseInt(quantityInput.value);
+
+            // Reset any previous error messages
+            errorMessage.textContent = '';
+
+            // Validate quantity input
+            if (isNaN(quantity) || quantity < 1) {
+                errorMessage.textContent = "Please enter a valid quantity greater than zero.";
+                return false; // Prevent form submission
+            }
+
+            cartItems += quantity; // Update cart item count
+            totalPrice += price * quantity; // Update total price
+
+            // Update cart summary
+            document.getElementById('cart-items').innerText = `Items in Cart: ${cartItems}`;
+            document.getElementById('cart-total').innerText = `Total Price: $${totalPrice.toFixed(2)}`;
+
+            // Show a quick animation (optional)
+            const cartSummary = document.querySelector('.cart-summary');
+            cartSummary.style.animation = 'scaleIn 0.3s ease-in-out'; // Scale in animation for cart summary
+            setTimeout(() => {
+                cartSummary.style.animation = ''; // Reset animation
+            }, 300);
+            
+            return false; // Prevent form submission
+        }
+
+        // Function to validate contact form
+        function validateContactForm(event) {
+            event.preventDefault(); // Prevent the form from submitting
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const contactError = document.getElementById('contact-error');
+
+            // Reset any previous error messages
+            contactError.textContent = '';
+
+            // Simple validation for name and email
+            if (!name) {
+                contactError.textContent = "Please enter your name.";
+                return false;
+            }
+
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; // Basic email pattern
+            if (!email || !emailPattern.test(email)) {
+                contactError.textContent = "Please enter a valid email address.";
+                return false;
+            }
+
+            alert(`Name: ${name}, Email: ${email}`); // Simulate successful submission
+            // You can add additional logic for processing the contact information here
+
+            return false; // Prevent form submission
+        }
+
+        // Function to handle placing an order
+        function placeOrder() {
+            alert(`You are about to place an order for ${cartItems} item(s) totaling $${totalPrice.toFixed(2)}.`); // Alert the order details
+            // Add your order processing logic here
+        }
+
+        // Function to automatically change background color
+        function changeBackgroundColor() {
+            const colors = ['#f4f4f4', '#ffcccc', '#ccffcc', '#ccccff', '#ffffcc', '#ffe6cc'];
+            let index = 0;
+
+            setInterval(() => {
+                document.body.style.backgroundColor = colors[index];
+                index = (index + 1) % colors.length; // Cycle through colors
+            }, 3000); // Change color every 3 seconds
+        }
+
+        // Start the background color change when the page loads
+        window.onload = changeBackgroundColor;
+
+    </script>
+
+</body>
+</html>
